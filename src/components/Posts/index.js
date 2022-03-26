@@ -6,10 +6,20 @@ import PropTypes from 'prop-types';
 import './style.scss';
 
 // import react
+import Post from './Post';
 
-const Main = ({ propsMain }) => (
-  <main>
-    <h1>Mon body {propsMain} </h1>
+const Posts = () => (
+  <main className="posts">
+    <h1 className="posts-title">Mon Blog</h1>
+    <div className="posts-list">
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+    </div>
+
   </main>
 
 );
@@ -22,8 +32,8 @@ const Main = ({ propsMain }) => (
   })).isRequired,
 }; */
 
-Main.propTypes = {
-  propsMain: PropTypes.string.isRequired,
+Posts.propTypes = {
+ // propsMain: PropTypes.string.isRequired,
 };
 
-export default Main;
+export default Posts;

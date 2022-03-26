@@ -7,9 +7,12 @@ import './style.scss';
 
 // import react
 
-const Header = ({ propsHeader }) => (
-  <header>
-    <h1>Ho..., le beau front qu'on va faire en {propsHeader} </h1>
+const Header = ({}) => (
+  <header className="menu">
+    <nav>
+      <a className="menu-link">Lien</a>
+      <a className="menu-link active">Lien</a>
+    </nav>
   </header>
 );
 
@@ -22,7 +25,7 @@ const Header = ({ propsHeader }) => (
 }; */
 
 Header.propTypes = {
-  propsHeader: PropTypes.string.isRequired,
+ // propsHeader: PropTypes.string.isRequired,
 };
 
 export default Header;

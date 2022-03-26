@@ -7,14 +7,14 @@ import React from 'react';
 // == Import
 import './styles.scss';
 import Header from '../Header';
-import Main from '../Main';
+import Posts from '../Posts';
 import Footer from '../Footer';
 
 // == Composant
 const App = () => (
-  <div className="app">
+  <div className="blog">
     <Header propsHeader="REACT !" />
-    <Main propsMain="toujours en React !" />
+    <Posts propsMain="toujours en React !" />
     <Footer propsFooter={(new Date()).getFullYear()} />
   </div>
 );

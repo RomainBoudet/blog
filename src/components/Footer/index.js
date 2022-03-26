@@ -8,7 +8,7 @@ import './style.scss';
 // import react
 
 const Footer = ({ propsFooter }) => (
-  <footer>
+  <footer className="copyright">
     <span> Ⓒ Romain Boudet - {propsFooter} </span>
   </footer>
 

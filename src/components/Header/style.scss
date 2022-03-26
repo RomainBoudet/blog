@@ -1,9 +1,17 @@
 @use 'src/styles/vars';
  
-img {
-  max-width: 150px;
-}
+.menu {
+  text-align: center;
+  padding: vars.$gutter;
+  border-bottom: 1px solid vars.$alt-color;
 
-h1 {
-  margin: 2rem;
+  &-link {
+    margin: 0 1rem;
+    cursor: pointer;
+    color: vars.$dark-color;
+
+    &:hover, &.active {
+      color: vars.$primary-color;
+    }
+  }
 }

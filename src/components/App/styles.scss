@@ -1,7 +1,9 @@
-.app {
-  width: 500px;
-  margin: 1em auto;
-  text-align: center;
+@use 'src/styles/vars';
 
+.blog {
+
+  font-family: vars.$global-font;
+  font-weight: vars.$global-font-weight;
+  background-color: vars.$light-color;
 
 }
