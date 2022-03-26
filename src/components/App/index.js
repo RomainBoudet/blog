@@ -10,12 +10,16 @@ import Header from '../Header';
 import Posts from '../Posts';
 import Footer from '../Footer';
 
+// == Import data
+import categories from '../../data/categories';
+import postsData from '../../data/posts';
+
 // == Composant
 const App = () => (
   <div className="blog">
-    <Header propsHeader="REACT !" />
-    <Posts propsMain="toujours en React !" />
-    <Footer propsFooter={(new Date()).getFullYear()} />
+    <Header list={categories} />
+    <Posts list={postsData} />
+    <Footer year={(new Date()).getFullYear()} />
   </div>
 );
 

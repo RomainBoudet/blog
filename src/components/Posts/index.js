@@ -8,32 +8,26 @@ import './style.scss';
 // import react
 import Post from './Post';
 
-const Posts = () => (
+const Posts = ({ list }) => (
   <main className="posts">
     <h1 className="posts-title">Mon Blog</h1>
     <div className="posts-list">
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {list.map((item) => (
+        <Post
+          key={item.id}
+          {...item} // je veux créer autant de props que ce qu'il y a dans mon objet: je destructure
+        />
+      ))}
     </div>
 
   </main>
 
 );
 
-/* Exmaple.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    unit: PropTypes.string.isRequired,
-    myFunction: PropTypes.func.isRequired,
-  })).isRequired,
-}; */
-
 Posts.propTypes = {
- // propsMain: PropTypes.string.isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default Posts;

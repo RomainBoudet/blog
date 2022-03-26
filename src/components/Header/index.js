@@ -7,25 +7,28 @@ import './style.scss';
 
 // import react
 
-const Header = ({}) => (
+const Header = ({ list }) => (
   <header className="menu">
     <nav>
-      <a className="menu-link">Lien</a>
-      <a className="menu-link active">Lien</a>
+      {
+        list.map((item) => (
+          <a
+            key={item.label}
+            className="menu-link"
+            href={item.route}
+          >{item.label}
+          </a>
+        ))
+      }
     </nav>
   </header>
 );
 
-/* Exmaple.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    unit: PropTypes.string.isRequired,
-    myFunction: PropTypes.func.isRequired,
-  })).isRequired,
-}; */
-
 Header.propTypes = {
- // propsHeader: PropTypes.string.isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape({
+    route: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default Header;

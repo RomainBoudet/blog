@@ -7,9 +7,9 @@ import './style.scss';
 
 // import react
 
-const Footer = ({ propsFooter }) => (
+const Footer = ({ year }) => (
   <footer className="copyright">
-    <span> Ⓒ Romain Boudet - {propsFooter} </span>
+    <span> Ⓒ Romain Boudet - {year} </span>
   </footer>
 
 );
@@ -23,7 +23,7 @@ const Footer = ({ propsFooter }) => (
 }; */
 
 Footer.propTypes = {
-  propsFooter: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
 };
 
 export default Footer;
