@@ -9,6 +9,7 @@ import './styles.scss';
 import Header from '../Header';
 import Posts from '../Posts';
 import Footer from '../Footer';
+import NotFound from '../NotFound';
 
 // == Import data
 import categories from '../../data/categories';
