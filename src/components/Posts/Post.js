@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style-post.scss';
 
-const Post = ({title, category, excerpt}) => (
+const Post = ({ title, category, excerpt }) => (
   <article className="post">
     <h2 className="post-title">{title}</h2>
     <div className="post-category">{category}</div>

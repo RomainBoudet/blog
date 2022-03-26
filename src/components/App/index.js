@@ -3,6 +3,7 @@
 // situé a la racine du fichier src.
 // == Import npm
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
@@ -15,11 +16,30 @@ import NotFound from '../NotFound';
 import categories from '../../data/categories';
 import postsData from '../../data/posts';
 
+const filterPosts = (category) => {
+  if (category === 'Accueil') {
+    return postsData;
+  }
+  return postsData.filter((item) => item.category === category);
+};
+
 // == Composant
 const App = () => (
   <div className="blog">
     <Header list={categories} />
-    <Posts list={postsData} />
+    <Routes>
+      {
+        categories.map((item) => (
+          <Route
+            key={item.route}
+            path={item.route}
+            element={(
+              <Posts list={filterPosts(item.label)} />
+            )}
+          />
+        ))
+      }
+    </Routes>
     <Footer year={(new Date()).getFullYear()} />
   </div>
 );
