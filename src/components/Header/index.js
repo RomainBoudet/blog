@@ -13,7 +13,7 @@ const Header = ({ list }) => (
     <nav>
       {
         list.map((item) => (
-          <NavLink
+          <NavLink // rajoute la classe 'active' si sélectionné
             key={item.label}
             className="menu-link"
             to={item.route}

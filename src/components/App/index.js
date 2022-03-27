@@ -39,6 +39,9 @@ const App = () => (
           />
         ))
       }
+      {/* ici je peux ajouter une 404 ! en selectionnant *,
+  on prend tout ce qui n'était pas pris en compte précédemment, fallBack ! */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
     <Footer year={(new Date()).getFullYear()} />
   </div>
