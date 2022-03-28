@@ -2,7 +2,7 @@
 // Et cet unique composant App sera rendu via la méthode render dans le fichier index.js
 // situé a la racine du fichier src.
 // == Import npm
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 // == Import
@@ -24,11 +24,33 @@ const filterPosts = (category) => {
 };
 
 // == Composant
-const App = () => (
-  <div className="blog">
-    <Header list={categories} />
-    <Routes>
-      {
+const App = () => {
+  const [state, setState] = useState({
+    count: 0,
+    prenom: 'Romain',
+  });
+
+  return (
+    <div className="blog">
+      <Header list={categories} />
+      <div>
+        <p>
+          {state.prenom} Vous avez cliquez {state.count} fois !
+        </p>
+        <button
+          type="button"
+          onClick={() => setState({
+            ...state, // pas comme les class, ici jécrase tout a la redéfinition du state,
+            // je dois récupéréer touc ce qu'il y avait dans le state original
+            // avec le spread opérator
+            count: state.count + 1,
+          })}
+        >
+          cliquez moi
+        </button>
+      </div>
+      <Routes>
+        {
         categories.map((item) => (
           <Route
             key={item.route}
@@ -39,10 +61,11 @@ const App = () => (
           />
         ))
       }
-    </Routes>
-    <Footer year={(new Date()).getFullYear()} />
-  </div>
-);
+      </Routes>
+      <Footer year={(new Date()).getFullYear()} />
+    </div>
+  );
+};
 
 // == Export
 export default App;
