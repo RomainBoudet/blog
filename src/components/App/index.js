@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 // Ce composant est un container à composants, dans lequel je mettrais tous mes autres composants.
 // Et cet unique composant App sera rendu via la méthode render dans le fichier index.js
 // situé a la racine du fichier src.
 // == Import npm
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 
 // == Import
 import './styles.scss';
@@ -15,25 +17,51 @@ import Spinner from '../Spinner';
 
 // == Import data
 import categories from '../../data/categories';
-import postsData from '../../data/posts';
 
-const filterPosts = (category) => {
-  if (category === 'Accueil') {
-    return postsData;
-  }
-  return postsData.filter((item) => item.category === category);
-};
+const URL = 'https://api-blog.romainboudet.fr/v1';
 
 // == Composant
 const App = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // doit être dans mon composant React !!
+  const [posts, setPosts] = useState([]); // par défault un tableau vide quand je n'ai pas encore d'article !
+  const fetchPost = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: 'get',
+        url: `${URL}/posts`,
+      });
+      // avec axios la data est envoyé par le serveur
+      // data toujours dans response .data
+      // je met le tableau reçu dans mon state !
+      console.log("response d'axios => ", response.data);
+      setPosts(response.data);
+    }
+    catch (error) {
+      console.trace(error);
+    }
+    // le finally est toujours éxécuté !
+    // succé ou non
+    finally {
+      setLoading(false);
+    }
+  };
+
+  // Désormais cette fonction qui utilise le state 'post', doit être dans mon composant pour y avoir accés !
+  const filterPosts = (category) => {
+    if (category === 'Accueil') {
+      return posts;
+    }
+    return posts.filter((item) => item.category === category);
+  };
 
   return (
     <div className="blog">
       <Header list={categories} />
       <button
         type="button"
-        onClick={() => setLoading(!loading)}
+        onClick={fetchPost}
       >
         change loading
       </button>
