@@ -16,15 +16,16 @@ import NotFound from '../NotFound';
 import Spinner from '../Spinner';
 
 // == Import data
-import categories from '../../data/categories';
-
 const URL = 'https://api-blog.romainboudet.fr/v1';
 
 // == Composant
 const App = () => {
   const [loading, setLoading] = useState(false); // doit être dans mon composant React !!
   const [posts, setPosts] = useState([]); // par défault un tableau vide quand je n'ai pas encore d'article !
+  const [category, setCategory] = useState([]); // par défault un tableau vide quand je n'ai pas encore d'article !
+
   // on va chercher les données dans l'API !
+
   const fetchPost = async () => {
     try {
       setLoading(true);
@@ -33,7 +34,6 @@ const App = () => {
         method: 'get',
         url: `${URL}/posts`,
       });
-      console.log("response d'axios => ", response.data);
       setPosts(response.data);
     }
     catch (error) {
@@ -46,23 +46,45 @@ const App = () => {
     }
   };
 
+  const fetchCategory = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: 'get',
+        url: `${URL}/category`,
+      });
+      setCategory(response.data);
+    }
+    catch (error) {
+      console.trace(error);
+    }
+    // le finally est toujours éxécuté !
+    // succés ou non
+    finally {
+      setLoading(false);
+    }
+  };
+
+  // J'utilise useEffect pour exécuter une fonction juste aprés mon rechargement
+  // juste aprés mon 1er render seulement, avec un tableau vide.
+  // J'utilise useEffect pour appleler on fnction fetch !
+  useEffect(() => {
+    fetchPost();
+    fetchCategory();
+  }, []);
+
   // Désormais cette fonction qui utilise le state 'post', doit être dans mon composant pour y avoir accés !
-  const filterPosts = (category) => {
-    if (category === 'Accueil') {
+  const filterPosts = (choosenCategory) => {
+    if (choosenCategory === 'Accueil') {
       return posts;
     }
-    return posts.filter((item) => item.category === category);
+    return posts.filter((item) => item.category === choosenCategory);
   };
 
   return (
     <div className="blog">
-      <Header list={categories} />
-      <button
-        type="button"
-        onClick={fetchPost}
-      >
-        change loading
-      </button>
+      <Header list={category} />
       {
       loading && <Spinner />
       }
@@ -70,7 +92,7 @@ const App = () => {
       !loading && (
         <Routes>
           {
-        categories.map((item) => (
+        category.map((item) => (
           <Route
             key={item.route}
             path={item.route}
@@ -81,7 +103,8 @@ const App = () => {
         ))
       }
           {/* ici je peux ajouter une 404 ! en selectionnant *,
-  on prend tout ce qui n'était pas pris en compte précédemment, fallBack ! */}
+      on prend tout ce qui n'était pas pris en compte précédemment, fallBack ! */
+      }
           <Route path="*" element={<NotFound />} />
         </Routes>
       )
