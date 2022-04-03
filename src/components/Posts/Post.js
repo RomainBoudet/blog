@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style-post.scss';
-import DOMPurify from 'dompurify';
-
 
 const Post = ({ title, category, excerpt }) => (
   <article className="post">
     <h2 className="post-title">{title}</h2>
     <div className="post-category">{category}</div>
-    <p
-      className="post-excerpt"
-      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(excerpt)}}
-    />
+    <p className="post-excerpt">{excerpt}</p>
   </article>
 );
 

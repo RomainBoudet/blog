@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+import DOMPurify from 'dompurify';
 
 // == Import
 import './styles.scss';
@@ -30,11 +31,29 @@ const App = () => {
     try {
       setLoading(true);
 
-      const response = await axios({
+      const res = await axios({
         method: 'get',
         url: `${URL}/posts`,
       });
-      setPosts(response.data);
+      console.log('res.data dans le App component => ', res.data);
+
+      const safeData = [];
+      // eslint-disable-next-line no-restricted-syntax
+      console.time("test");
+      for (const item of res.data) {
+        const data = Object.fromEntries(Object.entries(item).map(([key, value]) => [key, DOMPurify.sanitize(value)]));
+        safeData.push(data);
+        console.log(safeData);
+      }
+      console.timeEnd("test");
+
+      setPosts(safeData);
+
+      // setPosts(DOMPurify.sanitize(response.data));
+      // On veut purifier chaque élement recu en provenance de l'API avant affichage.
+      // Dans le cas d'une API infecté, on se prémuni d'injecter du code malicieux
+      // res.data est un tableau d'objet.
+      // et pour chaque objet je dois boucler dessus.
     }
     catch (error) {
       console.trace(error);
