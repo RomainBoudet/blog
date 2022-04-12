@@ -9,18 +9,12 @@ import './style.scss';
 
 const Footer = ({ year }) => (
   <footer className="copyright">
-    <span> Ⓒ Romain Boudet - {year} </span>
+    <a href="https://romainboudet.fr">
+      <span> Ⓒ Romain Boudet - {year} </span>
+    </a>
   </footer>
 
 );
-
-/* Exmaple.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    unit: PropTypes.string.isRequired,
-    myFunction: PropTypes.func.isRequired,
-  })).isRequired,
-}; */
 
 Footer.propTypes = {
   year: PropTypes.number.isRequired,

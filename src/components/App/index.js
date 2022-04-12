@@ -21,6 +21,7 @@ const URL = 'https://api-blog.romainboudet.fr/v1';
 
 // == Composant
 const App = () => {
+  // Mon hook custom réutilisable !
   const [posts, postLoading] = useAjax(`${URL}/posts`);
   const [category, categoriesLoading] = useAjax(`${URL}/category`);
 
@@ -47,7 +48,7 @@ const App = () => {
           <Route key={item.route} path={item.route} element={(<Posts list={filterPosts(item.label)} />)}/>))
          }
           <Route path="/articles/:slug" element={(<Postentier list={posts} />)} />
-          {/* ici je peux ajouter une 404 ! en selectionnant *, on prend tout ce qui n'était pas pris en compte précédemment, 
+          {/* ici je peux ajouter une 404 ! en selectionnant *, on prend tout ce qui n'était pas pris en compte précédemment,
           fallBack ! */}
           <Route path="*" element={<NotFound message="Aucun article correspondant n'a été trouvé !" />} />
         </Routes>

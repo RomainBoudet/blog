@@ -11,6 +11,7 @@ import './style.scss';
 const Header = ({ list }) => (
   <header className="menu">
     <nav>
+      <a href="https://romainboudet.fr" target="_blank" rel="noreferrer"><img className="logo" src="/RB.ico" alt="Logo Romain Boudet" /></a>
       {
         list.map((item) => (
           <NavLink // rajoute la classe 'active' si sélectionné
