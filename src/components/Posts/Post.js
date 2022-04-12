@@ -10,8 +10,12 @@ const Post = ({
     <Link to={`/articles/${slug}`}>
       <h2 className="post-title">{title}</h2>
     </Link>
-    <div className="post-category">{category}</div>
-    <p className="post-excerpt">{excerpt}</p>
+    <Link to={`/${category}`}>
+      <div className="post-category">{category}</div>
+    </Link>
+    <Link to={`/articles/${slug}`}>
+      <p className="post-excerpt">{excerpt}</p>
+    </Link>
   </article>
 );
 
