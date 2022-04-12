@@ -26,7 +26,7 @@ const Posts = ({ list }) => (
 
 Posts.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   })).isRequired,
 };
 

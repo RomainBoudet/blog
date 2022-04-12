@@ -12,6 +12,7 @@ import DOMPurify from 'dompurify';
 import './styles.scss';
 import Header from '../Header';
 import Posts from '../Posts';
+import Postentier from '../Posts/Postentier';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
 import Spinner from '../Spinner';
@@ -35,17 +36,13 @@ const App = () => {
         method: 'get',
         url: `${URL}/posts`,
       });
-      console.log('res.data dans le App component => ', res.data);
 
       const safeData = [];
       // eslint-disable-next-line no-restricted-syntax
-      console.time("test");
       for (const item of res.data) {
         const data = Object.fromEntries(Object.entries(item).map(([key, value]) => [key, DOMPurify.sanitize(value)]));
         safeData.push(data);
-        console.log(safeData);
       }
-      console.timeEnd("test");
 
       setPosts(safeData);
 
@@ -121,10 +118,20 @@ const App = () => {
           />
         ))
       }
+
+          <Route
+            path="/articles/:slug"
+            element={(
+              <Postentier
+                list={posts}
+              />
+              )}
+          />
+
           {/* ici je peux ajouter une 404 ! en selectionnant *,
       on prend tout ce qui n'était pas pris en compte précédemment, fallBack ! */
       }
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound message="Aucun article correspondant n'a été trouvé !" />} />
         </Routes>
       )
 
