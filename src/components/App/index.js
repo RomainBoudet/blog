@@ -38,37 +38,20 @@ const App = () => {
       {
       (postLoading || categoriesLoading) && <Spinner />
       }
+
       {
       !(postLoading || categoriesLoading) && (
         <Routes>
           {
         category.map((item) => (
-          <Route
-            key={item.route}
-            path={item.route}
-            element={(
-              <Posts list={filterPosts(item.label)} />
-            )}
-          />
-        ))
-      }
-
-          <Route
-            path="/articles/:slug"
-            element={(
-              <Postentier
-                list={posts}
-              />
-              )}
-          />
-
-          {/* ici je peux ajouter une 404 ! en selectionnant *,
-      on prend tout ce qui n'était pas pris en compte précédemment, fallBack ! */
-      }
+          <Route key={item.route} path={item.route} element={(<Posts list={filterPosts(item.label)} />)}/>))
+         }
+          <Route path="/articles/:slug" element={(<Postentier list={posts} />)} />
+          {/* ici je peux ajouter une 404 ! en selectionnant *, on prend tout ce qui n'était pas pris en compte précédemment, 
+          fallBack ! */}
           <Route path="*" element={<NotFound message="Aucun article correspondant n'a été trouvé !" />} />
         </Routes>
       )
-
       }
 
       <Footer year={(new Date()).getFullYear()} />
