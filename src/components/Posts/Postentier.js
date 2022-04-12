@@ -8,8 +8,8 @@ import NotFound from '../NotFound';
 const Postentier = ({ list }) => {
   // je récupére le slug de mon article
   const { slug } = useParams();
-  // il faut que j'ai accés a tous mes articles
-  // et je recherche les données lié a un post précis, celuis qui posséde mon slug
+  // il faut que j'ai accés à tous mes articles
+  // et je recherche les données lié à un post précis, celuis qui posséde mon slug
   const article = list.find((item) => item.slug === slug);
   // si article vaut undefined car pas de slug :
   // 404

@@ -5,7 +5,7 @@ import './style.scss';
 const NotFound = ({ message }) => (
   <div>
     <h1 className="not-found"> 404 </h1>
-    <p className="message">{ message }</p>
+    <p className="message">{`Oups... ${message}`}</p>
   </div>
 
 );
